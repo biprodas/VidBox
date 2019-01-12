@@ -1,6 +1,6 @@
-# Vidly - a movie rental service app
+# VidBox - a movie rental service app
 
-> Learning Node.js by creating a video store app, by following the udemy tutorial: [Node.js: The Complete Guide to Build RESTful APIs (2018)](https://www.udemy.com/nodejs-master-class/)
+> Learning Node.js by creating a video store app, by following the udemy tutorial: [Node.js: The Complete Guide to Build RESTful APIs (2018)](https://www.udemy.com/nodejs-master-class/).
 
 ## To do
 
@@ -33,9 +33,9 @@
 
 #### After complete installation Node and mongodb.
 
-```shell
-git clone https://github.com/bipro10/vidly.git
-cd vidly
+```bash
+git clone https://github.com/bipro10/VidBox.git
+cd VidBox
 npm install
 npm start
 ```
