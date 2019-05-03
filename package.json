@@ -1,0 +1,25 @@
+{
+  "name": "vidbox",
+  "version": "1.0.0",
+  "description": "Creating a RESTful API for a video rental service with Node.js, Express & MongoDB",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/biprodas/VidBox.git"
+  },
+  "author": "Biprodas Roy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/biprodas/VidBox/issues"
+  },
+  "homepage": "https://github.com/biprodas/VidBox#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.0"
+  }
+}

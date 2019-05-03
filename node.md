@@ -1,15 +1,83 @@
-# Building RESTful APIs with Express
-> REST: REprestational State Transfer  
-> API: Application Programming Interface
+# Node cook-book
 
-#### REST defines a set of conventions for creating HTTP services:
-  - POST: to create a resource
-  - PUT: to update it
-  - GET: to read it
-  - DELETE: to delete it
+## Building RESTful APIs with Express
+> **REST**: REprestational State Transfer  
+> **API**: Application Programming Interface  
+> **CRUD**: Create, Read, Update, Delete
+
+### HTTP Methods: REST defines a set of conventions for creating HTTP services
+  - `POST`: to create a resource
+  - `PUT`: to update it
+  - `GET`: to read it
+  - `DELETE`: to delete it
+
+### Examples
+```bash
+# Get all the users
+GET /api/users
+# get a user of id 1
+GET /api/users/1
+# update the user of id 1
+PUT /api/users/1
+# delete user of id 1
+DELETE /api/user/1
+# create a new user
+POST /api/users
+```
+
+#### GET users
+```bash
+# Request
+GET /api/users
+
+# Response
+[
+  { id: 1, name: 'Biprodas'},
+  { id: 2, name: 'Hiranmoy'},
+]
+```
+
+#### GET a user
+```bash
+# Request
+GET /api/users/1
+
+# Response
+{ id: 1, name: 'Biprodas'}
+```
+
+#### UPDATE a user
+```bash
+# Request
+PUT /api/users/1
+
+{ name: 'biprodasroy'}
+
+# Response
+{ id: 1, name: 'biprodasroy '}
+```
+
+#### DELETE a user
+```bash
+# Request
+DELETE /api/users/1
+
+# Response
+```
+
+#### CREATE a user
+```bash
+# Request
+POST /api/users
+
+{ name: 'biprodasroy'}
+
+# Response
+{ id: 1, name: 'Biprodas'},
+```
 
 > Express is a simple, minimalistic and lightweight framework for building web servers.
-```bash
+```js
 # Build a web server
 const express = require('express');
 const app = express();

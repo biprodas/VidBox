@@ -1,6 +1,6 @@
 # VidBox - a movie rental service app
 
-> Learning Node.js by creating a video store app, by following the udemy tutorial: [Node.js: The Complete Guide to Build RESTful APIs (2018)](https://www.udemy.com/nodejs-master-class/).
+> Learning Node.js by creating a video store app, by the following udemy tutorial: [Node.js: The Complete Guide to Build RESTful APIs (2018)](https://www.udemy.com/nodejs-master-class/).
 
 ## To do
 
@@ -29,7 +29,7 @@
 ## Quick Start
 #### Prerequisites
 - > Install [NodeJS](https://nodejs.org/en/download/).
-- > Install and connect [mongoDB](https://www.mongodb.com/).
+- > Connect to [mongoDB](https://www.mongodb.com/).
 
 #### After complete installation Node and mongodb.
 
