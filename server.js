@@ -1,4 +1,5 @@
 const express = require('express');
+const Joi = require('joi');
 
 const app = express();
 
@@ -27,6 +28,16 @@ app.get('/api/courses', (req, res) => {
 
 // create a new course
 app.post('/api/courses', (req, res) => {
+  const schema = {
+    name: Joi.string().min(3).required(),
+    author: Joi.string().min(3).required()
+  }
+  const validation = Joi.validate(req.body, schema);
+  console.log(validation);
+  if(validation.error){
+    return res.status(404).send(validation.error.details[0].message);
+  }
+
   const course = {
     id: courses.length + 1,
     name: req.body.name,
