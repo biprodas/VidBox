@@ -1,6 +1,6 @@
 # Node cook-book
 
-## Building RESTful APIs with Express
+## Building RESTful APIs using Express
 > **REST**: REprestational State Transfer  
 > **API**: Application Programming Interface  
 > **CRUD**: Create, Read, Update, Delete
@@ -77,7 +77,7 @@ POST /api/users
 ```
 
 > Express is a simple, minimalistic and lightweight framework for building web servers.
-```js
+```bash
 # Build a web server
 const express = require('express');
 const app = express();
@@ -133,35 +133,77 @@ app.listen(port);
 - You should never trust data sent by the client. Always validate! Use Joi package to perform input validation.
 
 
-# Express: Advanced Topics
+## Express: Advanced Topics
 
-- A middleware function is a function that takes a request object and either terminates the request/response cycle or passes control to another middleware function.
-- Express has a few built-in middleware functions:
-- json(): to parse the body of requests with a JSON payload
-- urlencoded(): to parse the body of requests with URL-encoded payload
-- static(): to serve static files
-- You can create custom middleware for cross-cutting concerns, such as logging, authentication, etc.
-```shell
+- [ ] Middleware
+- [ ] Environment
+- [ ] Configuration
+- [ ] Debugging
+- [ ] Templating Engine
+- [ ] Database Integration
+- [ ] Authentication
+
+### Middleware function
+
+A middleware function is a function that takes a request object and either terminates the request/response cycle or passes control to another middleware function.
+
+#### Custom middleware
+You can create custom middleware for cross-cutting concerns, such as logging, authentication, etc.
+```bash
 # Custom middleware (applied on all routes)
 app.use(function(req, res, next)) {
-    # ...
-next();
+  # ...
+  next();
 }
 
 # Custom middleware (applied on routes starting with /api/admin)
 app.use('/api/admin', function(req, res, next)) {
     # ...
-next();
+    next();
 }
+
 ```
 
-- We can detect the environment in which our Node application is running (development, production, etc) using process.env.NODE_ENV and app.get(‘env’).
-- The config package gives us an elegant way to store configuration settings for our applications.
-- We can use the debug package to add debugging information to an application. Prefer this approach to console.log(statements.
+#### Built in middleware
+
+Express has a few built-in middleware functions:
+- json(): to parse the body of requests with a JSON payload
+- urlencoded(): to parse the body of requests with URL-encoded payload
+- static(): to serve static files
+- 
+#### Third-party middleware
+
+- helmet
+- morgan 
+and many more...
+
+### Environments
+
+We can detect the environment in which our Node application is running (development, production, etc) using process.env.NODE_ENV and app.get(‘env’).
+
+```js
+console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
+console.log(`app: ${app.get('env')}`);
+```
+
+### Configuration
+
+The config package gives us an elegant way to store configuration settings for our applications.
+
+### Debugging
+
+- We can use the debug package to add debugging information to an application. Prefer this approach to console.log statements.
+  
+### Templating Engine
+
+- [ ] Pug
+- [ ] Mustache
+- [ ] EJS
+
 - To return HTML markup to the client, use a templating engine. There are various templating engines available out there. Pug, EJS and Mustache are the most popular ones.
 
 
-# Mongo DB
+## Mongo DB
 - MongoDB is an open-source document database. It stores data in flexible, JSONlike documents.  
 - In relational databases we have tables and rows, in MongoDB we have collections and documents. A document can contain sub-documents.  
 - We don’t have relationships between documents.  

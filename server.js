@@ -5,6 +5,7 @@ const app = express();
 
 app.use(express.json());
 
+
 const courses = [
   { id: 1, name: 'Node.js masterclass', author: 'Mosh'},
   { id: 2, name: 'Mastering React', author: 'Mosh'},
@@ -82,7 +83,7 @@ app.delete('/api/courses/:id', (req, res) => {
   res.send(course);
 })
 
-validateCourse = (course) => {
+function validateCourse(course) {
   const schema = {
     name: Joi.string().min(3).required(),
     author: Joi.string().min(3).required()
