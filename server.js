@@ -1,13 +1,22 @@
 const express = require('express');
+const mongoose = require('mongoose');
 
 const genres = require('./routes/genres');
+const customers = require('./routes/customers');
 const home = require('./routes/home');
 
 const app = express();
 
+// Connect to DB
+mongoose.connect('mongodb://localhost/vidly',  { useNewUrlParser: true })
+  .then(() => console.log('Connected to MongoDB...'))
+  .catch(err => console.error('Connection failed...'));
+
 app.use(express.json());
 app.use('/api/genres', genres);
+app.use('/api/customers', customers);
 app.use('/', home);
+
 
 
 // Listening on port

@@ -4,6 +4,7 @@ const dbDebugger = require('debug')('app:db');
 const express = require('express');
 const helmet = require('helmet');
 const morgan = require('morgan');
+const mongoose = require('mongoose');
 
 const courses = require('./routes/courses')
 const home = require('./routes/home')
@@ -35,8 +36,11 @@ if(app.get('env')==='development'){
   //debug('Morgan enabled..');
 }
 
-// DB work..
-dbDebugger('Connected to database..');
+// Connect to DB
+mongoose.connect('mongodb://localhost/playground')
+    .then(() => console.log('Connected to MongoDB...'))
+    .catch(err => console.error('Connection failed...'));
+//dbDebugger('Connected to database..');
 
 app.use(logger);
 

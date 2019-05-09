@@ -1,21 +1,5 @@
-/*
-console.log('Before');
-
-const user = getUser(1);
-console.log(user); // undefined
-
-console.log('After'); 
-
-
-function getUser(id){
-  setTimeout(() => {
-    console.log('Reading a user from a database...');
-    return { id: id, name: 'Biprodas' };
-  }, 2000);
-}
-
-
 // Callbacks
+/*
 console.log('Start');
 
 getAuthor(1, author => {
@@ -47,7 +31,7 @@ function getCourses(author, callback){
     callback(['Node masterclass', 'mastering react', 'MERN front to back']);
   }, 7000);
 }
-
+*/
 
 // CALLBACK HELL
 console.log('Before');
@@ -88,19 +72,3 @@ function getCommits(repo, callback){
 function displayCommits(commits){
   console.log('commits ' + commits[0].commit_1);
 }
-*/
-
-
-// Promises
-const promise = new Promise((resolve, reject) => {
-  // kick off some async work
-  // ...
-  //resolve('resolved :)');
-  reject(new Error('rejected :('));
-});
-
-promise
-  .then(res => console.log('Result', res))
-  .catch(err => console.log('Error', err.message));
-
-// Async/await
