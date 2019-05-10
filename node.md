@@ -211,7 +211,7 @@ The config package gives us an elegant way to store configuration settings for o
 - In relational databases we have tables and rows, in MongoDB we have collections and documents. A document can contain sub-documents.  
 - We don’t have relationships between documents.  
 
-#### Mongo DB Connection
+### Mongo DB Connection
 ```bash
 # Connecting to MongoDB
 const mongoose = require('mongoose');
@@ -220,7 +220,7 @@ mongoose.connect('mongodb://localhost/playground')
     .catch(err => console.error('Connection failed...'));
 ```
 
-#### Schema
+### Schema
 > To store objects in MongoDB, we need to define a Mongoose schema first. The schema defines the shape of documents in MongoDB.
 
 ```bash
@@ -242,7 +242,7 @@ const courseSchema = new mongoose.Schema({
 # Supported types are: `String`, `Number`, `Date`, `Buffer` (for storing binary data), `Boolean` and `ObjectID`.
 ```
 
-#### Model
+### Model
 > Once we have a schema, we need to compile it into a model. A model is like a class. It’s a blueprint for creating objects.
 
 ```bash
@@ -250,7 +250,7 @@ const courseSchema = new mongoose.Schema({
 const Course = mongoose.model('Course', courseSchema);
 ```
 
-#### CRUD Operations
+### CRUD Operations
 ```bash
 # Saving a document
 let course = new Course({ name: 'Node.js' });
@@ -287,7 +287,7 @@ const course = await Course.findByIdAndRemove(id);
 ```
 
 
-#### Mongoose: Data Validation
+### Mongoose: Data Validation
 When defining a schema, you can set the type of a property to a SchemaType object. You use this object to define the validation requirements for the given property.
 
 ```bash
@@ -343,7 +343,7 @@ price: {
 ```
 
 
-#### Mongoose: Modelling Relationships between Connected Data
+### Mongoose: Modelling Relationships between Connected Data
 
 - To model relationships between connected data, we can either reference a document or embed it in another document.
 - When referencing a document, there is really no relationship between these two documents. So, it is possible to reference a non-existing document.
@@ -351,30 +351,36 @@ price: {
 - Embedding documents (denormalization) solves this issue. We can read a complete representation of a document with a single query. All the necessary data is embedded in one document and its children. But this also means we’ll have multiple copies of data in different places. While storage is not an issue these days, having multiple copies means changes made to the original document may not propagate to all copies. If the database server dies during an update, some documents will be inconsistent. For every business, for every
 problem, you need to ask this question: “can we tolerate data being inconsistent for a short period of time?” If not, you’ll have to use references. But again, this means that your queries will be slower.
 
-```bash
-# Referencing a document
+#### Normalization
+```js
+// Referencing a document
 const courseSchema = new mongoose.Schema({
-    author: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: ‘Author’
-    }
-})
-
-# Referencing a document
-const courseSchema = new mongoose.Schema({
-    author: {
-        type: new mongoose.Schema({
-            name: String,
-            bio: String
-        })
-    }
+  author: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: ‘Author’
+  }
 })
 ```
+#### Denormalization
+
+```js
+// Referencing a document (Normalization) => CONSISTENCY
+const courseSchema = new mongoose.Schema({
+  author: {
+    type: new mongoose.Schema({
+      name: String,
+      bio: String
+    })
+  }
+})
+```
+
+#### Trade of between query performance vs consistency
 
 - Embedded documents don’t have a save method. They can only be saved in the context of their parent.
 
 ```bash
-# Updating an embedded document
+# Updating an embedded document (Denormalization) =>   PERFORMANCE
 const course = await Course.findById(courseId);
 course.author.name = 'New Name';
 course.save();
