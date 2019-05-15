@@ -357,7 +357,7 @@ problem, you need to ask this question: “can we tolerate data being inconsiste
 const courseSchema = new mongoose.Schema({
   author: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: ‘Author’
+    ref: 'Author'
   }
 })
 ```
