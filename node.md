@@ -413,3 +413,9 @@ equal but the odds are very low (1/16,000,000) for most real-world applications.
 mongoose.Types.ObjectID.isValid(id);
 ```
 - To validate ObjectIDs using joi, use joi-objectid NPM package.
+
+
+## Authentication and Authorization
+
+**Register: ** `POST` /api/users
+**Login: ** `POST` /api/logins
