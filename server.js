@@ -14,4 +14,6 @@ require('./startup/validation')();
 
 // Listening on port
 const port = process.env.PORT || 5000;
-app.listen(port, () => winston.info(`Server running on port ${port}...`));
+const server = app.listen(port, () => winston.info(`Server running on port ${port}...`));
+
+module.exports  = server;

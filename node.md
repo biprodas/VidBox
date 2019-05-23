@@ -419,3 +419,113 @@ mongoose.Types.ObjectID.isValid(id);
 
 **Register: ** `POST` /api/users
 **Login: ** `POST` /api/logins
+
+
+## Hangling and Loggin Errors
+
+- Our applications don't run in an ideal world. Unexpected result can happen as a result of bugsin out code or issues in the running environment.
+For example: our mongoDB server may shut down, or a remote http service we call may go down.
+
+- A good developers should count for these unsexpected errors, log them and return a proper error to the client.
+
+- Use the unexpected error middleware to catch any unhandled exceptions in the "request processing pipeling".
+
+Register the error middleware after all the existing routes:
+
+```js
+app.use(function(err, req, res, next){
+  // Log the exception and return a friendly error to the client
+  res.status(500).sent('SOmething failed :(');
+});
+```
+
+- To pass control to the error middleware, wrap the route handler code in a try-catch block and call next().
+
+```js
+try{
+  const genre = await Genre.find();
+  ...
+}
+catch(ex){
+  next(ex);
+}
+```
+
+- Adding a try-catch to every route handler is repetitive and time consumming. Use `express-async-errors` module. This module will monkey-patch your route handlers at runtime. It'll wrap your code within a try/catch block and pass unhandled errors to your middleware.
+
+- To log errors use [winston]()
+
+- Winston can log errors in multiple transports. A transport is where our log is stored.
+
+- The core tranports that come with winston are **Console**, **File** and **Http**. There are also 3rd-party transports for storing logs in MongoDB, CoutchDB, Redis and Loggly.
+
+- The error middleawre in express only catches exceptions in the request processing pipeline. Any errors happening during the application startup (eg connecting to MongoDB) will be invisible to express.
+
+- Use `process.on('uncaughtException')` to catch unhandled exceptions, and `process.on('unhandledRejection')` to catch rejected promise.
+
+- As a best practice, in the event handlers you pass to `process.on()`, your should log the exception and exit the process, because your process may be in an unclean state and it may result in more issues in the future. It's better to restart the process in a clean state.
+In production you can use a process manager to autometically restart the node process.
+
+
+## Testing
+
+### Unit Testing
+
+- Automated testing is the practice of writing code to test our code.
+- Automated tests help us deliver software with fewer bugs and of better quality.
+They also help us refactor our code with confidence.
+- [Jest]() is a new trending popular testing framework recommended by Facebook. It
+comes with everything you need to write automated tests.
+- We have 3 types of automated tests:
+1. ***Unit tests:*** Test a unit of an application without external resources (eg db)
+2. ***Integration tests:*** Test the application with external resources.
+3. ***Functional or end-to-end tests:*** Test the application through its UI.
+- Tests should not be too general nor too specific. If they’re too general, they don’t
+give you much confidence that your code works. If they’re too specific, they
+become fragile and can break easily. As you write code, you have to spend extra
+unnecessary time to fix these broken tests.
+- Mocking is replacing a real implementation of a function with a fake or mock
+function. It allows us to isolate our application code from its external resources.
+- Popular Jest matcher functions:
+```js
+// Equality
+expect(...).toBe();
+expect(...).toEqual();
+// Truthiness
+expect(...).toBeDefined();
+expect(...).toBeNull();
+expect(...).toBeTruthy();expect(...).toBeFalsy();
+// Numbers
+expect(...).toBeGreaterThan();
+expect(...).toBeGreaterThanOrEqual();
+expect(...).toBeLessThan();
+expect(...).toBeLessThanOrEqual();
+// Strings
+expect(...).toMatch(/regularExp/);
+// Arrays
+expect(...).toContain();
+// Objects
+expect(...).toBe(); // check for the equality of object references
+expect(...).toEqual(); // check for the equality of properties
+expect(...).toMatchObject();
+// Exceptions
+expect(() => { someCode }).toThrow();
+```
+
+### Interation Test
+
+- Unit tests are easy to write, fast to execute and are ideal for testing functions with
+minimal or zero dependency on external resources.
+- The more you use mock functions, the more your tests get coupled to the current
+implementation. If you change this implementation in the future, your tests will
+break. If you find yourself doing too much mocking, that’s when you need to
+replace your unit test with an integration test.
+- With integration tests, we test our application with a real database. As a best
+practice, separate your test database from the development or production
+databases.
+- You should write each integration test as if it is the only test in the world. Start
+with a clean state (database). Populate the database only with the data required
+by the test. Nothing more, nothing less. Clean up after your test using the
+afterEach function.
+- Run `jest` with —coverage flag to get a code coverage report.
+
