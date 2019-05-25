@@ -468,6 +468,7 @@ In production you can use a process manager to autometically restart the node pr
 
 
 ## Testing
+- Tests are first-class citizens in our source code
 
 ### Unit Testing
 
@@ -529,3 +530,11 @@ by the test. Nothing more, nothing less. Clean up after your test using the
 afterEach function.
 - Run `jest` with —coverage flag to get a code coverage report.
 
+### Tooling 
+
+#### Library and Frameworks
+- [ ] Jasmine
+- [ ] Mocha, Sinon, chai
+- [ ] Jest
+
+#### Test Runner
