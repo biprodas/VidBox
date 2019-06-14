@@ -8,6 +8,9 @@
     "server": "nodemon server.js",
     "test": "jest --watchAll"
   },
+  "jest": {
+    "testEnvironment": "node"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/biprodas/VidBox.git"
