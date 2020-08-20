@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/biprodas/VidBox#readme",
   "dependencies": {
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^5.0.0",
     "config": "^3.1.0",
     "debug": "^4.1.1",
     "express": "^4.16.4",
